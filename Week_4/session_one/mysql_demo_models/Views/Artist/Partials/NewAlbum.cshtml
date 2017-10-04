@@ -1,0 +1,27 @@
+@model mysql_test.Models.Album
+<h2>Add Album</h2>
+<form asp-controller="Artist" asp-action="CreateAlbum" method="post">
+    <div class="form-group">
+        <label asp-for="@Model.Name"></label>
+        <span asp-validation-for="@Model.Name"></span>
+        <input asp-for="@Model.Name">
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.ReleaseDate"></label>
+        <span asp-validation-for="@Model.ReleaseDate"></span>
+        <input asp-for="@Model.ReleaseDate">
+    </div>    
+    <div class="form-group">
+        <label asp-for="@Model.ArtistId"></label>
+        <span asp-validation-for="@Model.ArtistId"></span>
+        <select asp-for="@Model.ArtistId">
+            @{
+            foreach(var artist in @Model.Artists)
+            {
+                <option value="@artist["id"]">@artist["name"]</option>
+            }
+            }
+        </select>
+    </div>
+    <input class='btn btn-primary' type="submit" value='Add Artist'>
+</form>

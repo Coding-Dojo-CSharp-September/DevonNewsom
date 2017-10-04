@@ -1,0 +1,12 @@
+@model mysql_test.Models.Artist
+<h2>Add Artist</h2>
+<form asp-controller="Artist" asp-action="CreateArtist" method="post">
+    <div class="form-group">
+        <label asp-for="@Model.Name"></label>
+        <div>
+            <span asp-validation-for="@Model.Name"></span>
+            <input type="text" asp-for="@Model.Name">
+        </div>
+    </div>
+    <input class='btn btn-primary' type="submit" value='Add Artist'>
+</form>

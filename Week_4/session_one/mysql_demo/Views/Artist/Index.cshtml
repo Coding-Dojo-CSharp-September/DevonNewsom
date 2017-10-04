@@ -1,0 +1,65 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="container">
+    <h1>My Artists</h1>
+    <ul>
+        @{
+            foreach(var artist in ViewBag.Artists)
+            {
+                <li>@artist["name"]</li>
+            }
+        }
+    </ul>
+    <h1>My Albums</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Album Name</th>
+                <th>Artist</th>
+                <th>Release Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach(var album in ViewBag.Albums)
+                {
+                    <tr>
+                        <td>@album["album_name"]</td>
+                        <td>@album["artist_name"]</td>
+                        <td>@album["release_date"].Date.ToString("dd MMM yyyy")</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <hr>
+    <h2>Add New Artist</h2>
+    <form action="artist/create" method="post">
+        <div class="form-group">
+            <label for="name">Artist Name</label>
+            <input type="text" name="name" class="form-control">
+        </div>
+        <input type="submit" value="Add Artist">
+    </form>
+    <h2>Add New Album</h2>
+    <form action="album/create" method="post">
+        <div class="form-group">
+            <label for="name">Album Name</label>
+            <input type="text" name="name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="release_date">Release Date</label>
+            <input type="text" name="release_date" class="form-control">
+        </div>
+        <select name="artist_id" class="form-control">
+            @{
+                foreach(var artist in ViewBag.Artists)
+                {
+                    <option value="@artist["id"]">@artist["name"]</option>
+                }
+            }
+        </select>
+        <input type="submit" value="Add Artist">
+    </form>
+</div>
