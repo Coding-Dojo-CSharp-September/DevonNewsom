@@ -1,0 +1,46 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model ModelLecture.Models.HomePageUsers
+<h1>Register</h1>
+<form asp-action="Register" asp-controller="User" method="post">
+    <div class="form-group">
+        <span asp-validation-for="Register.FirstName"></span>
+        <label asp-for="Register.FirstName"></label>
+        <input class="form-control" asp-for="Register.FirstName">
+    </div>
+    <div class="form-group">
+            <span asp-validation-for="Register.LastName"></span>
+            <label asp-for="Register.LastName"></label>
+            <input class="form-control" asp-for="Register.LastName">
+        </div>
+    <div class="form-group">
+        <span asp-validation-for="Register.Email"></span>
+        <label asp-for="Register.Email"></label>
+        <input class="form-control" asp-for="Register.Email">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="Register.Password"></span>
+        <label asp-for="Register.Password"></label>
+        <input class="form-control" asp-for="Register.Password">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="Register.Confirm"></span>
+        <label asp-for="Register.Confirm"></label>
+        <input class="form-control" asp-for="Register.Confirm">
+    </div>
+    <input type="submit" value="Submit">
+</form>
+<h1>Login</h1>
+<form asp-action="Login" asp-controller="User" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Login.Email"></label>
+        <input class="form-control" asp-for="Login.Email">
+    </div>
+    <div class="form-group">
+        <label asp-for="Login.Password"></label>
+        <input class="form-control" asp-for="Login.Password">
+    </div>
+    <input type="submit" value="Submit">
+</form>
