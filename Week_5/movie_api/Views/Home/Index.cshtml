@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Rating</th>
+            <th>Release Year</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach(Film film in @ViewBag.Films)
+    {
+        <tr>
+            <td>@film.Title</td>
+            <td>@film.Rating</td>
+            <td>@film.ReleaseYear.ToString("MM/dd/yyyy")</td>
+        </tr>
+    }
+    </tbody>
+</table>
