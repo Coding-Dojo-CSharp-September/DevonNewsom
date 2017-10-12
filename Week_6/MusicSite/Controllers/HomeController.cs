@@ -13,6 +13,7 @@ namespace MusicSite.Controllers
         {
             artistFactory = new ArtistFactory();
         }
+
         // GET: /Home/
         [HttpGet]
         [Route("")]
@@ -21,5 +22,22 @@ namespace MusicSite.Controllers
             ViewBag.Artists = artistFactory.FindAll();
             return View();
         }
+        [HttpPost]
+        [Route("create")]
+        public IActionResult Create(Artist artist)
+        {
+            if(ModelState.IsValid)
+            {
+                artistFactory.Add(artist);
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        [Route("artist/{id}")]
+        public IActionResult Show(int id)
+        {
+            return View(artistFactory.GetArtistById(id));
+        }
+      
     }
 }
