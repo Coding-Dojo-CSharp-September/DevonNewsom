@@ -1,0 +1,15 @@
+@model newChefs.Models.LogChef
+<h2>Login</h2>
+<form method="post" asp-controller="Chef" asp-action="Login">
+    <div class="form-group">
+        <span asp-validation-for="LogUsername"></span>
+        <label asp-for="LogUsername"></label>
+        <input class="form-control" asp-for="LogUsername">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="LogPassword"></span>
+        <label for="" asp-for="LogPassword"></label>
+        <input class="form-control" asp-for="LogPassword">
+    </div>
+    <input type="submit" value="Add">
+</form>

@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model newChefs.Models.Dashboard
+@using newChefs.Models
+<nav>
+    <h2>Welcome @Model.User.FirstName</h2>
+    <a href="/logout">Logout</a>
+</nav>
+<hr>
+<h2>Add a Dish</h2>
+<form method="post" asp-controller="Dashboard" asp-action="Create">
+    <div class="form-group">
+        <span asp-validation-for="CreateDish.Name"></span>
+        <label for="" asp-for="CreateDish.Name"></label>
+        <input type="text" class="form-control" asp-for="CreateDish.Name">
+    </div>
+    <input type="submit" value="Add Dish">
+</form>
+<hr>
+<h3>Other Chefs</h3>
+@foreach(Chef chef in Model.Chefs)
+{
+    <p><a href="/chefs/@chef.ChefId">@chef.FirstName @chef.LastName</a></p>
+}
