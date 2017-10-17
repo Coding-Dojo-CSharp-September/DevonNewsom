@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 namespace doc_demo
 {
@@ -37,19 +38,49 @@ namespace doc_demo
     }
     public class Deck
     {
-        public List<Card> deck;
+        public List<Card> cards;
         public Deck()
         {
-            deck = new List<Card>();
+            this.cards = new List<Card>();
             for(int i = 0; i < 4; i++)
             {
                 for(int j = 1; j < 14; j++)
                 {
                     Card card = new Card(j, i);
-                    deck.Add(card);
+                    this.cards.Add(card);
                 }
             }
         }
+        public void Shuffle()
+        {
+            Random rand = new Random();
+            // go through half
+            for(int i=0;i<(this.cards.Count/2);i++)
+            {
+                // swap this.cards[i] with this.cards[rand]
+                int randy = rand.Next(this.cards.Count);
+                Card card = this.cards[i];
+                this.cards[i] = this.cards[randy];
+                this.cards[randy] = card;
+            }
+        }
+        public Card Deal()
+        {
+            Card cardToDeal = this.cards[0];
+            this.cards.RemoveAt(0);
+            return cardToDeal;
+        }
+    }
+    class Player
+    {
+        List<Card> Hand = new List<Card>();
+        public Player()
+        {
 
+        }
+        public void Draw(Card card)
+        {
+            Hand.Add(card);
+        }
     }
 }
