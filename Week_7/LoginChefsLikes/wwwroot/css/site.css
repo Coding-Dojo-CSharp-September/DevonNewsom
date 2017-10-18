@@ -1,0 +1,12 @@
+/*Write all of your CSS here*/
+.index-form, .info{
+    display: inline-block;
+    margin: 10px;
+    vertical-align: top;
+}
+.index-form{
+    width: 35%;
+}
+.info{
+    width: 25%;
+}
