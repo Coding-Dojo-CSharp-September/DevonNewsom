@@ -1,0 +1,29 @@
+@using System;
+@using System.Collections.Generic;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>SUP @ViewBag.UserName</h1>
+    <h3> - id: @ViewBag.UserId</h3>
+    <h2>Here is some fuit</h2>
+    <ul>
+        @foreach(string fruit in ViewBag.Fruit){
+            <p>@fruit</p>
+        }
+
+    </ul>
+    <form action="/submit" method="POST">
+        <input type="text" name="name" id="" placeholder="Name">
+        <input type="text" name="location" placeholder="Location">
+        <input type="text" name="dob" placeholder="Location">
+        <input type="submit" value="Send it!">
+    </form>
+</body>
+</html>
