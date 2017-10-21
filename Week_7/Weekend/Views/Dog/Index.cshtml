@@ -1,0 +1,21 @@
+@model Weekend.Models.Dog
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Dog Home Page!</h1>
+    <form method="post" asp-controller="Dog" asp-action="Create">
+        <div class="form-group">
+            <span asp-validation-for="Name"></span>
+            <label asp-for="Name"></label>
+            <input type="text" class="form-control" asp-for="Name">
+        </div>
+        <input type="submit" value="Create">
+    </form>
+</body>
+</html>
