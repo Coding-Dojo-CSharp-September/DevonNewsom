@@ -6,15 +6,21 @@ namespace doc_demo
     {
         static void Main(string[] args)
         {
-            Deck myDeck = new Deck();
-            myDeck.Shuffle();
+            TaroCommon common = new TaroCommon();
+            common.Shuffle();
+            TaroHigh high = new TaroHigh();
+            high.Shuffle();
 
-            Player sup = new Player();
-            sup.Draw(myDeck.Deal());
-            sup.Draw(myDeck.Deal());
-            sup.Draw(myDeck.Deal());
-            sup.Draw(myDeck.Deal());
-            sup.Draw(myDeck.Deal());
+            Player party = new Player();
+            party.Draw(common.Deal());
+            party.Draw(common.Deal());
+            party.Draw(common.Deal());
+            party.Draw(high.Deal());
+            party.Draw(high.Deal());
+            foreach(ICard card in party.Hand)
+            {
+                System.Console.WriteLine(card.Value);
+            }
 
         }
     }
