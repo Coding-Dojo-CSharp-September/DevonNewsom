@@ -1,0 +1,7 @@
+@if(TempData["errors"] is string[])
+{
+    @foreach(string error in TempData["errors"])
+    {
+        <p>@error</p>
+    }
+}
