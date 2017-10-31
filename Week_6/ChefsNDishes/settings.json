@@ -1,5 +1,0 @@
-{
-    "DB": {
-        "ConnectionStringy": "server=localhost;userid=root;password=root;port=3306;database=EF;SslMode=None"
-    }
-}
