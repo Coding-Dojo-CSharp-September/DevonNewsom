@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Asp HELLO!!!</title>
+</head>
+<body>
+    <h1>Heelo from VIEW!!!</h1>
+    @{
+        
+        foreach(string animal in ViewBag.Animals)
+        {
+            <p>@animal</p>
+        }
+        
+    }
+    <form action="/submit" method="post">
+        <input type="text" name="first" placeholder="First Name">
+        <input type="text" name="last" placeholder="Last Name">
+        <input type="submit" value="Post">
+    </form>
+</body>
+</html>
