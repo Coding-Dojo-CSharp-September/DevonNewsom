@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using dbconnection.Validations;
 namespace dbconnection.Models
 {
     public class RegUser
@@ -9,10 +10,13 @@ namespace dbconnection.Models
 
         [Display(Name="First Name")]
         [Required(ErrorMessage="This field is required")]
+        [MinLength(2)]
+        [NoDevon]
         public string first_name {get;set;}
 
         [Display(Name="Last Name")]
         [Required(ErrorMessage="This field is required")]
+        [MinLength(2)]
         public string last_name {get;set;}
 
         [Display(Name="Email")]
