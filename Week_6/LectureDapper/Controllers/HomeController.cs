@@ -31,7 +31,7 @@ namespace LectureDapper.Controllers
             if(ModelState.IsValid)
             {
                 artistFactory.CreateArtist(artist);
-                RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             ViewBag.Artists = artistFactory.GetAllArtists();
             return View("Index");
