@@ -1,0 +1,45 @@
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#                   C# 2 Week 6 | Session 1
+#                      ORM #1: Dapper
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# Database connections: A Recap and Preview
+#
+# (Current)
+# DbConnector.Query/Execute
+#
+# How to use:
+# Raw SQL strings are passed to custom methods.
+#
+# Result of Queries:
+# List<Dictionary<string, object>>
+# 
+# ---------------------------------------
+#
+# (Today)
+# Dapper
+#
+# How to use:
+# Use raw SQL strings to build Dapper methods
+#
+# Result of Queries:
+# List<YourModel>
+#   OR
+# YourModel
+#   OR
+# Whatever you want!
+#
+# ---------------------------------------
+#
+# (Later)
+# Entity Framework
+#
+# How to use:
+# Linq + EF "Context" will be your ORM
+# 
+# Result of Queries:
+# List<YourModel>
+#   OR
+# YourModel
+#   OR
+# Whatever you want!
