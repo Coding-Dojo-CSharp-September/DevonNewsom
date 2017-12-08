@@ -1,0 +1,18 @@
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#                   C# 2 Week 6 | Session 2
+#                       Entity Framework
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# 1) The industry standard ORM for this stack
+#
+# 2) Our Startup class will pass a "context" object to our controllers
+#       EF will allow us to query our DB from this object, using LINQ expressions
+#       Thats right Linq!  (It may be a good idea to refresh your memory on Linq)
+#
+# 3) We can separate our DB connection info into a json file
+#
+# 4) Packages:
+#
+#   SDK v1.x: MySql.Data.EntityFrameworkCore -v 7.0.7-*
+#             
+#   SDK v2.x: Pomelo.EntityFrameworkCore.MySql -v 2.0.3

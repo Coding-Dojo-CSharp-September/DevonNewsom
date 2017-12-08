@@ -1,0 +1,12 @@
+@model HelloEF.Models.Artist
+<h1>Welcome to @Model.name super cool page!!!</h1>
+<hr>
+<h2>Edit this Artist</h2>
+<form asp-action="Show" asp-controller="Home" method="post">
+    <div class="form-group">
+        <span asp-validation-for="name"></span>
+        <label asp-for="name"></label>
+        <input class="form-control" asp-for="name">
+    </div>
+    <input type="submit" value="Edit">
+</form>
