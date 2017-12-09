@@ -1,20 +1,5 @@
-@{
-    ViewData["Title"] = "Home Page";
-}
-@model HelloEF.Models.Artist
-<h1>Music Site</h1>
+<h1>Welcome to MUSIC SITE</h1>
 <hr>
-<h2>Here are all my artists!</h2>
-@foreach(var artist in ViewBag.Artists)
-{
-    <a href="/artist/@artist.id">@artist.name</a>
-}
-<h2>Add Artist to Site!</h2>
-<form method="post" asp-controller="Home" asp-action="Create">
-    <div class="form-group">
-        <span asp-validation-for="name"></span>
-        <label asp-for="name"></label>
-        <input class="form-control" asp-for="name">
-    </div>
-    <input type="submit" value="Add Artist">
-</form>
+<h2>Login and Register.</h2>
+@Html.Partial("Login")
+@Html.Partial("Register")

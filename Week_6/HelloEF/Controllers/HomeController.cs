@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using HelloEF.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 
 namespace HelloEF.Controllers
 {
@@ -20,47 +21,84 @@ namespace HelloEF.Controllers
         [Route("")]
         public IActionResult Index()
         {
-            ViewBag.Artists = _context.artists.ToList();
+           
 
             return View();
         }
 
         [HttpPost("create")]
-        public IActionResult Create(Artist artist)
+        public IActionResult Create(NewUser user)
         {
-            // Check uniqueness of artist name
-            if(_context.artists.Where(a => a.name == artist.name)
+            // Check uniqueness of user's email
+            if(_context.users.Where(u => u.email == user.email)
                                .ToList()
                                .Count() > 0)
             {
-                ModelState.AddModelError("name", "Artist name already exists");
+                ModelState.AddModelError("email", "Email already exists");
             }
             if(ModelState.IsValid)
             {
-                _context.artists.Add(artist);
+                // Create User
+                PasswordHasher<User> hasher = new PasswordHasher<User>();
+
+                // setting the user's password field to hashed string of the form's plaintext password
+                User toCreate = new User()
+                {
+                    first_name = user.first_name,
+                    last_name = user.last_name,
+                    email = user.email,
+                    password = hasher.HashPassword(user, user.password)
+                };
+
+                _context.users.Add(toCreate);
                 _context.SaveChanges();
-                return Json(artist);
+
+                // Log NewUser into Session
+                HttpContext.Session.SetInt32("id", (int)toCreate.id);
+
+                return Json(toCreate);
             }
             return View("Index");
         }
-        [HttpGet("artist/{id}")]
-        public IActionResult Show(int id)
-        {
-            Artist thisArtist = _context.artists.SingleOrDefault(a => a.id == id);
-            return View(thisArtist);
-        }
 
-        [HttpPost("artist/{id}")]
-        public IActionResult Show(Artist artist)
+        [HttpPost("login")]
+        public IActionResult Login(LoginUser user)
         {
+            // Check if email exists
+            if(_context.users.Where(u => u.email == user.logEmail)
+                               .ToList()
+                               .Count() == 0)
+            {
+                ModelState.AddModelError("logEmail", "Invalid Email/Password");
+            }
+            else
+            {
+
+                // get user with email from form, for retrieving hashed pw
+                User toCheck = _context.users.SingleOrDefault(u => u.email == user.logEmail);
+                // Check User's Password
+                PasswordHasher<LoginUser> hasher = new PasswordHasher<LoginUser>();
+
+                // if VerifyHashedPassword returns a Failure, we can check that against 0
+                if(hasher.VerifyHashedPassword(user, toCheck.password, user.logPassword) == 0)
+                {
+                    ModelState.AddModelError("logEmail", "Invalid Email/Password");
+                }
+            }
             if(ModelState.IsValid)
             {
-                Artist toUpdate = _context.artists.SingleOrDefault(a => a.id == artist.id);
-                toUpdate.name = artist.name;
-                _context.SaveChanges();
-                return RedirectToAction("Index");
+                // get user with email from form, for retrieving hashed pw
+                User userToLog = _context.users.SingleOrDefault(u => u.email == user.logEmail);
+
+                // Log User into Session
+                HttpContext.Session.SetInt32("id", (int)userToLog.id);
+
+                return Json(userToLog);
             }
-            return View("Show", new {id=artist.id});
+            return View("Index");
         }
+       
+
+        
     }
 }

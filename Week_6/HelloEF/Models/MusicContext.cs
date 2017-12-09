@@ -8,6 +8,7 @@ namespace HelloEF.Models
         public MusicContext(DbContextOptions options) : base (options) 
         { }
         public DbSet<Artist> artists {get;set;}
+        public DbSet<User> users {get;set;}
 
     }
 }
