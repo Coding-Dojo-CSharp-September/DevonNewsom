@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HelloEF.Models
@@ -5,11 +7,12 @@ namespace HelloEF.Models
     public class Artist
     {
         [Key]
-        public long id {get;set;}
+        public long artist_id {get;set;}
         
         [Required]
         [MinLength(3)]
         [Display(Name="Artist Name")]
         public string name {get;set;}
+        public List<Album> albums {get;set;}
     }
 }

@@ -1,0 +1,48 @@
+@model HelloEF.Models.ShowArtist
+<h1>Welcome to @Model.Artist.name super cool page!!!</h1>
+<hr>
+<h2>Has the following albums:</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Album Title</th>
+            <th>Release Date</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach(var album in Model.Artist.albums)
+    {
+        <tr>
+            <td>@album.name</td>
+            <td>@album.release_date.ToString("D")</td>
+        </tr>
+    }
+    </tbody>
+</table>
+<hr>
+<h2>Add Album</h2>
+<form asp-action="CreateAlbum" asp-controller="Artist" method="POST">
+    <div class="form-group">
+        <span asp-validation-for="NewAlbum.name"></span>
+        <label asp-for="NewAlbum.name"></label>
+        <input class="form-control" asp-for="NewAlbum.name">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="NewAlbum.release_date"></span>
+        <label asp-for="NewAlbum.release_date"></label>
+        <input class="form-control" asp-for="NewAlbum.release_date">
+    </div>
+    <input type="hidden" asp-for="NewAlbum.artist_id" value="@Model.Artist.artist_id">
+    <input type="submit" value="Add Album">
+</form>
+<hr>
+<h2>Edit this Artist</h2>
+<form asp-action="Show" asp-controller="Artist" method="post">
+    <div class="form-group">
+        <span asp-validation-for="Artist.name"></span>
+        <label asp-for="Artist.name"></label>
+        <input class="form-control" asp-for="Artist.name">
+    </div>
+    <input type="hidden" asp-for="Artist.artist_id" value="@Model.Artist.artist_id">
+    <input type="submit" value="Edit">
+</form>
