@@ -1,0 +1,36 @@
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#                   C# 2 Week 7 | Session 1
+#                       EF Relationships
+#                         One to Many
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+#    With EF, we can map our DB relationships using our model classes! 
+# 
+# Requirements:
+#
+#   SQL: 
+#       primary keys should match foreign keys, ie.
+#       User [has many] Message
+#
+#       User - 
+#           user_id
+#           first_name
+#           last_name
+#       Message -
+#           message_id
+#           content
+#           user_id
+#
+#   C# Models:
+#
+#       fields must match corrisponding SQL column, ie.
+#
+#       class User
+#           long user_id
+#           string first_name
+#           string last_name
+#
+#       class Message
+#           long message_id
+#           string content
+#           long user_id

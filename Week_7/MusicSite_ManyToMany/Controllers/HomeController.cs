@@ -1,0 +1,104 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using HelloEF.Models;
+using System.Linq;
+using Microsoft.AspNetCore.Identity;
+
+namespace HelloEF.Controllers
+{
+    public class HomeController : Controller
+    {
+        private MusicContext _context;
+        public HomeController(MusicContext context)
+        {
+            _context = context;
+        }
+
+        [HttpGet]
+        [Route("")]
+        public IActionResult Index()
+        {
+           
+
+            return View();
+        }
+
+        [HttpPost("create")]
+        public IActionResult Create(NewUser user)
+        {
+            // Check uniqueness of user's email
+            if(_context.users.Where(u => u.email == user.email)
+                               .ToList()
+                               .Count() > 0)
+            {
+                ModelState.AddModelError("email", "Email already exists");
+            }
+            if(ModelState.IsValid)
+            {
+                // Create User
+                PasswordHasher<User> hasher = new PasswordHasher<User>();
+
+                // setting the user's password field to hashed string of the form's plaintext password
+                User toCreate = new User()
+                {
+                    first_name = user.first_name,
+                    last_name = user.last_name,
+                    email = user.email,
+                    password = hasher.HashPassword(user, user.password)
+                };
+
+                _context.users.Add(toCreate);
+                _context.SaveChanges();
+
+                // Log NewUser into Session
+                HttpContext.Session.SetInt32("id", (int)toCreate.user_id);
+
+                return RedirectToAction("Index", "Artist");
+            }
+            return View("Index");
+        }
+
+        [HttpPost("login")]
+        public IActionResult Login(LoginUser user)
+        {
+            // Check if email exists
+            if(_context.users.Where(u => u.email == user.logEmail)
+                               .ToList()
+                               .Count() == 0)
+            {
+                ModelState.AddModelError("logEmail", "Invalid Email/Password");
+            }
+            else
+            {
+
+                // get user with email from form, for retrieving hashed pw
+                User toCheck = _context.users.SingleOrDefault(u => u.email == user.logEmail);
+                // Check User's Password
+                PasswordHasher<LoginUser> hasher = new PasswordHasher<LoginUser>();
+
+                // if VerifyHashedPassword returns a Failure, we can check that against 0
+                if(hasher.VerifyHashedPassword(user, toCheck.password, user.logPassword) == 0)
+                {
+                    ModelState.AddModelError("logEmail", "Invalid Email/Password");
+                }
+            }
+            if(ModelState.IsValid)
+            {
+                // get user with email from form, for retrieving hashed pw
+                User userToLog = _context.users.SingleOrDefault(u => u.email == user.logEmail);
+
+                // Log User into Session
+                HttpContext.Session.SetInt32("id", (int)userToLog.user_id);
+
+                return RedirectToAction("Index", "Artist");
+            }
+            return View("Index");
+        }
+       
+
+        
+    }
+}
