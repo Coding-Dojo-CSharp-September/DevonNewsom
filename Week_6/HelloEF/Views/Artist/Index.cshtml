@@ -7,7 +7,7 @@
 <h2>Here are all my artists!</h2>
 @foreach(var artist in ViewBag.Artists)
 {
-    <a href="/artist/@artist.id">@artist.name</a>
+    <a href="/artist/@artist.artist_id">@artist.name</a>
 }
 <h2>Add Artist to Site!</h2>
 <form method="post" asp-controller="Home" asp-action="Create">

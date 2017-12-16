@@ -46,7 +46,7 @@ namespace HelloEF.Controllers
         [HttpGet("artist/{id}")]
         public IActionResult Show(int id)
         {
-            Artist thisArtist = _context.artists.SingleOrDefault(a => a.id == id);
+            Artist thisArtist = _context.artists.SingleOrDefault(a => a.artist_id == id);
             return View(thisArtist);
         }
 
@@ -55,12 +55,12 @@ namespace HelloEF.Controllers
         {
             if(ModelState.IsValid)
             {
-                Artist toUpdate = _context.artists.SingleOrDefault(a => a.id == artist.id);
+                Artist toUpdate = _context.artists.SingleOrDefault(a => a.artist_id == artist.artist_id);
                 toUpdate.name = artist.name;
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View("Show", new {id=artist.id});
+            return View("Show", artist);
         }
     }
 }

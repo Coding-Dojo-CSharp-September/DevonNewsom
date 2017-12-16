@@ -5,7 +5,7 @@ namespace HelloEF.Models
     public class User
     {
         [Key]
-        public long id {get;set;}
+        public long user_id {get;set;}
 
         [Display(Name="First Name")]
         [MinLength(2)]

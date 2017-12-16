@@ -5,7 +5,7 @@ namespace HelloEF.Models
     public class Artist
     {
         [Key]
-        public long id {get;set;}
+        public long artist_id {get;set;}
         
         [Required]
         [MinLength(3)]

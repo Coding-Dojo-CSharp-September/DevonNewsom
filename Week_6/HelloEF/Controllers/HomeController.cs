@@ -54,7 +54,7 @@ namespace HelloEF.Controllers
                 _context.SaveChanges();
 
                 // Log NewUser into Session
-                HttpContext.Session.SetInt32("id", (int)toCreate.id);
+                HttpContext.Session.SetInt32("id", (int)toCreate.user_id);
 
                 return RedirectToAction("Index", "Artist");
             }
@@ -91,7 +91,7 @@ namespace HelloEF.Controllers
                 User userToLog = _context.users.SingleOrDefault(u => u.email == user.logEmail);
 
                 // Log User into Session
-                HttpContext.Session.SetInt32("id", (int)userToLog.id);
+                HttpContext.Session.SetInt32("id", (int)userToLog.user_id);
 
                 return RedirectToAction("Index", "Artist");
             }
