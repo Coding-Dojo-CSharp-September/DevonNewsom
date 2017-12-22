@@ -14,5 +14,9 @@ namespace Secrets.Models
         public int user_id {get;set;}
         public User Creator {get;set;}
         public List<Like> Likes {get;set;}
+        public TimeSpan Ago
+        {
+            get { return DateTime.Now - created_at; }
+        }
     }
 }

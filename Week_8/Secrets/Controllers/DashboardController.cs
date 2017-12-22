@@ -52,5 +52,30 @@ namespace Secrets.Controllers
             model.Secrets = _context.secrets.ToList();
             return View("Index", model);
         }
+        [HttpGet("secret/delete/{secret_id}")]
+        public IActionResult Delete(int secret_id)
+        {
+            // check secret for toDelete.user_id == LoggedUser.user_id
+            Secret toDelete = _context.secrets.SingleOrDefault(s => s.secret_id == secret_id);
+            if(toDelete.user_id == LoggedUser.user_id)
+            {
+                _context.secrets.Remove(toDelete);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet("like/{secret_id}")]
+        public IActionResult Like(int secret_id)
+        {
+            Like theLike = new Like()
+            {
+                user_id = LoggedUser.user_id,
+                secret_id = secret_id
+            };
+            _context.likes.Add(theLike);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
